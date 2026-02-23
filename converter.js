@@ -1,4 +1,6 @@
 function isBinary (input) {
+	if (Number.isNaN(parseInt(input)) && input.trim() === "") { return false };
+
 	for(let i = 0; i < input.length; i++) {
 		if (input[i] !== "0" && input[i] !== "1") { 
 			return false; 
@@ -8,28 +10,6 @@ function isBinary (input) {
 	return true;
 }
 
-function inputTaker () {
-	let input;
-	let number;
-	while (true) {
-		input = prompt("enter a binary number, q to quit");
-
-		if (input.toLowerCase() === "q") { return }
-
-		number = parseInt(input);
-
-		if (!Number.isNaN(number) && input.trim != "") {
-			if (isBinary(input)) {
-				console.log("Binary Digit: " + number);
-				break;
-			}
-		} else {
-			console.log("You have entered invalid binary number");
-		}
-	}
-
-	return number;
-}
 
 function binaryConverter (binaryDigit) {
 	let decimalNumber = 0;
@@ -46,6 +26,20 @@ function binaryConverter (binaryDigit) {
 	return decimalNumber;
 }
 
-let userInput = inputTaker();
-let result = binaryConverter(userInput);
-console.log("Decimal number: " + result);
+function resultDisplay (binary) {
+	if (binary === "") { 
+		display.textContent = "";
+	} else if (isBinary(binary)) {
+		display.textContent = binaryConverter(binary);
+	} else {
+		display.textContent = "invalid input";
+	}	
+}
+
+const inputs = document.querySelector("#binary-input");
+let display = document.querySelector(".result");
+inputs.addEventListener("input", (event) => {
+	let value = event.target.value;
+	resultDisplay(value)
+});
+
