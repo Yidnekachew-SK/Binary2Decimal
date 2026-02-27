@@ -29,7 +29,7 @@ h1 {
 	background-color: rgb(53, 182, 226);
 }
 
-label, input {
+.input, #number-type-selecter {
 	margin: 3px 0;
 }
 
